@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
+import {useRoutes, BrowserRouter as Router,} from "react-router-dom";
+
+import UserItemPage from "./components/UserItemPage";
+import UsersPage from "./components/UsersPage";
+
 import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+function App() {
+    let element = useRoutes([
+        {
+            path: "/",
+            element: <UsersPage />,
+
+        },
+        {
+            path: "/:id",
+            element: <UserItemPage />,
+        },
+    ]);
+
+    return element;
+}
+const AppWrapper = () => {
+    return (
+        <Router>
+            <App />
+        </Router>
+    );
+};
+
+export default AppWrapper;
